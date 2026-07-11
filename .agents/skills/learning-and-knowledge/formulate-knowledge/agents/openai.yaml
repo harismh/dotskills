@@ -1,0 +1,4 @@
+interface:
+  display_name: "Formulate Knowledge"
+  short_description: "Formulate durable knowledge as Mochi cards"
+  default_prompt: "Use $formulate-knowledge to turn this material into well-formulated Mochi Markdown through a collaborative review."
