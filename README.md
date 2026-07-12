@@ -4,6 +4,12 @@ A small collection of agent skills I made for myself in the spirit of dotfilesâ€
 
 Skills are grouped by area and ordered by how often I use them or how much impact I find they have.
 
+## Software architecture
+
+| Name | Description | Version | Rank |
+| --- | --- | ---: | :---: |
+| [Polylith](.agents/skills/software-architecture/polylith/SKILL.md) | Encodes the main ideas of the Polylith architecture and everyday `poly` CLI workflows. | `0.1` | `P5` |
+
 ## Learning and knowledge
 
 | Name | Description | Version | Rank |

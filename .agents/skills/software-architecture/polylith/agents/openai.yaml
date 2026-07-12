@@ -1,0 +1,4 @@
+interface:
+  display_name: "Polylith"
+  short_description: "Design and operate simple Polylith workspaces"
+  default_prompt: "Use $polylith to structure or work with this codebase using Polylith principles and the poly CLI."
