@@ -1,6 +1,6 @@
 ---
 name: polylith
-description: Design, explain, create, inspect, test, and evolve Clojure or ClojureScript Polylith workspaces with the poly CLI. Use when working with Polylith architecture, workspaces, components, bases, projects, bricks, interfaces, workspace.edn, incremental tests, dependency diagrams, or poly commands; when deciding brick boundaries or migrating a backend toward Polylith; and when reviewing whether code preserves Polylith's simplicity and composability.
+description: Design, explain, create, inspect, test, and evolve behavior-first Clojure or ClojureScript Polylith workspaces with the poly CLI. Use when working with Polylith architecture, operations, capabilities, protocols, workspaces, components, bases, projects, bricks, interfaces, workspace.edn, incremental tests, dependency diagrams, or poly commands; when deciding behavioral and brick boundaries or migrating a backend toward Polylith; and when reviewing whether code preserves Polylith's simplicity and composability.
 ---
 
 # Polylith
@@ -10,7 +10,8 @@ Treat Polylith first as a core architectural pattern and second as a CLI. Preser
 ## Start from the big ideas
 
 - Keep all bricks together in one workspace so coordinated changes stay atomic and development uses the latest code.
-- Model a cohesive capability as a component. Give it a small interface and keep its implementation ordinary code.
+- Start from behavior, not a taxonomy of domain types. Identify operations, the capabilities that realize them, and the protocols that coordinate those capabilities.
+- Package a cohesive behavioral unit as a component. Give it a small interface and keep its implementation ordinary code; do not assume one component per entity or data type.
 - Let components depend on other component interfaces and libraries, never on another component's implementation or identity.
 - Use a base only at a system boundary: REST, GraphQL, gRPC, Lambda, CLI, messaging, or another public entry point. Delegate domain behavior from the base to components.
 - Let a project choose the bricks and libraries that form one deployable artifact. Do not put reusable domain behavior in the project.
@@ -69,12 +70,13 @@ For any unfamiliar request, do not guess syntax. Run `poly help`, then `poly hel
 
 ## Apply design judgment
 
-- Extract a component around a stable capability, not merely because a namespace or layer exists.
+- Extract a component around a stable behavioral boundary, not merely because a noun, type, namespace, or layer exists.
 - Keep an interface narrow. Avoid exposing implementation namespaces or data that couples callers to internals.
+- Use the progression **operation → capability → protocol → meta-level composition** to reason about the system. Treat a Clojure `defprotocol` as one possible encoding of capability dispatch, not as the definition of “protocol” in this model. See [references/polylith-model.md](references/polylith-model.md#behavior-first-composition).
 - Reuse living source bricks across projects; do not publish internal components as versioned libraries merely to share them inside the workspace.
 - Keep bases thin. If business rules appear in endpoint handlers, move them behind a component interface.
 - Treat circular or bidirectional dependencies as a boundary problem. Redesign responsibilities instead of bypassing validation.
 - Do not introduce service boundaries, asynchronous messaging, dependency injection frameworks, or mutable component containers unless the problem truly requires them. Polylith's default connection is a direct function call.
 - Avoid turning Polylith into a directory convention. The value comes from explicit interfaces, one-way dependencies, composable project assembly, and incremental feedback.
 
-When recommending a structure, state why each proposed brick is cohesive, what its interface owns, which other interfaces it uses, and which projects include it.
+When recommending a structure, state which operations matter, which capabilities realize them, which protocols coordinate them, why each proposed brick is cohesive, what its interface owns, which other interfaces it uses, and which projects include it.
